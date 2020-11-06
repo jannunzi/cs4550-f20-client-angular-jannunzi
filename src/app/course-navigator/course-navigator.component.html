@@ -1,0 +1,54 @@
+<div class="container">
+  <h1>Course Navigator</h1>
+  <div class="row">
+    <div class="col-6">
+      <ul class="list-group">
+        <li class="list-group-item active">
+          Courses {{selectedCourse.title}}
+        </li>
+        <li (click)="selectCourse(course)"
+            class="list-group-item"
+            [ngClass]="{'list-group-item-success': course === selectedCourse}"
+            *ngFor="let course of courses">
+            <span [hidden]="course.editing">
+              {{course.title}}
+              <button (click)="editing(course)">
+                Edit
+              </button>
+            </span>
+          <span [hidden]="!course.editing">
+            <input [(ngModel)]="course.title"/>
+            <button (click)="deleteCourse(course)">
+            Delete
+            </button>
+            <button (click)="save(course)">
+              Save
+            </button>
+          </span>
+        </li>
+        <li class="list-group-item">
+          <button (click)="createCourse()">
+            Create
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <ul class="list-group">
+        <li class="list-group-item active">Modules</li>
+        <li *ngFor="let module of modules"
+            class="list-group-item">
+          {{module.title}}
+          <button (click)="deleteModule(module)">
+            Delete
+          </button>
+        </li>
+        <li class="list-group-item">
+          <button (click)="createModuleForCourse(selectedCourse)">
+            Create
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
